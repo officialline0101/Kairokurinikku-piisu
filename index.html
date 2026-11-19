@@ -50,7 +50,8 @@
         }
 
         /* 見出しラベル */
-        .label {
+        .label,
+        .labelkibounitizi {
             display: block;
             margin-bottom: 15px;
             padding: 8px 10px;
@@ -60,7 +61,7 @@
             border-radius: 0;
             font-size: 16px;
             text-align: left;
-            border-left: 5px solid #66bb6a; /* 左線デザインに変更 */
+            border-left: 5px solid #66bb6a;
             border-top: none;
             border-bottom: 1px solid #e0e0e0;
         }
@@ -77,7 +78,7 @@
             border-radius: 4px;
             border: 1px solid #c8e6c9;
         }
-        
+
         .highlight-text {
             font-weight: bold;
         }
@@ -90,6 +91,18 @@
             margin-left: 8px;
             vertical-align: middle;
             background-color: #ef5350; /* 優しい赤 */
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* 任意マーク */
+        .optional {
+            color: #fff;
+            font-weight: normal;
+            font-size: 11px;
+            margin-left: 8px;
+            vertical-align: middle;
+            background-color: #9e9e9e;
             padding: 2px 6px;
             border-radius: 4px;
         }
@@ -110,7 +123,8 @@
         }
 
         input:focus,
-        textarea:focus {
+        textarea:focus,
+        .datetime-input:focus {
             border-color: #66bb6a;
             background-color: #fff;
             outline: none;
@@ -118,10 +132,8 @@
         }
 
         /* ボタン群のレイアウト */
-        .visit-buttons,
         .symptoms,
-        .menu-sections,
-        .irradiations {
+        .menu-sections {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
@@ -129,10 +141,8 @@
         }
 
         /* ボタン共通スタイル（未選択時） */
-        .visit-buttons button,
         .symptoms button,
-        .menu-sections button,
-        .irradiations button {
+        .menu-sections button {
             flex: 1;
             padding: 12px;
             border: 1px solid #66bb6a; /* 緑の枠線 */
@@ -144,19 +154,15 @@
             font-size: 14px;
             transition: all 0.2s ease;
         }
-        
-        .visit-buttons button:hover,
+
         .symptoms button:hover,
-        .menu-sections button:hover,
-        .irradiations button:hover {
+        .menu-sections button:hover {
             background-color: #e8f5e9;
         }
 
         /* ボタン共通スタイル（選択時 - Active） */
-        .visit-buttons button.active,
         .symptoms button.active,
-        .menu-sections button.active,
-        .irradiations button.active {
+        .menu-sections button.active {
             background-color: #66bb6a; /* 緑塗りつぶし */
             color: #ffffff;
             border-color: #66bb6a;
@@ -164,19 +170,17 @@
             box-shadow: 0 2px 6px rgba(102, 187, 106, 0.4);
         }
 
-        /* 縦並び指定がある場合のスタイル */
-        .symptoms,
-        .options {
-            display: block; 
+        /* メニューボタンは縦並び */
+        .symptoms {
+            display: block;
         }
-        .symptoms button,
-        .options button {
+        .symptoms button {
             display: block;
             width: 100%;
             margin-bottom: 10px;
         }
 
-        /* 予約するボタン（送信） */
+        /* 送信ボタン */
         .submit-button {
             width: 100%;
             padding: 16px;
@@ -198,155 +202,49 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* カレンダー周り */
-        .calendar-container {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-/* 中段：年月表示コンテナ */
-        .current-month-container {
-            margin-top: 2px;    /* 上のボタンとの隙間を極小に */
-            margin-bottom: 2px; /* 下のボタンとの隙間を極小に */
-            text-align: center;
-        }
-        
-/* 年月表示のデザイン（サイズは元通りキープ） */
-        .current-month {
-            font-size: 18px;   /* 元の文字サイズ */
-            color: #2e7d32;
-            font-weight: bold;
-            background: #e8f5e9;
-            padding: 5px 15px; /* 元のふっくらしたサイズに戻す */
-            border-radius: 20px;
-            display: inline-block;
-            line-height: 1.2;  /* 行の高さを整えて余計な隙間を消す */
-        }
-
-/* 上段：月移動ボタン */
-        .month-button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0px; /* 下の隙間をゼロにする */
-        }
-
-/* 下段：週移動ボタン */
-        .week-button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px; /* カレンダー本体との距離 */
-        }
-
-/* 中段：年月表示コンテナ */
-        .current-month-container {
-            /* ★変更点：文字が大きくなる分、上下のマージンをマイナスにして距離を広げない（むしろ詰める） */
-            margin-top: -5px;
-            margin-bottom: -5px;
-            text-align: center;
-            position: relative;
-            z-index: 1; /* ボタンより前面に出す */
-        }
-        
-        /* 年月表示のデザイン（枠などの基本設定） */
-        .current-month {
-            color: #2e7d32;
-            font-weight: bold;
-            background: #e8f5e9;
-            /* ★変更点：上下の余白を極限まで減らして高さを抑える */
-            padding: 0px 30px; 
-            border-radius: 30px;
-            display: inline-block;
-            /* ★変更点：行間を詰めて縦幅を広げない */
-            line-height: 1; 
-        }
-
-        /* ★追加点：JavaScriptで生成される「年」のスタイル */
-        .current-month .year {
-            font-size: 14px; /* 年は控えめなサイズ */
-            display: block;  /* ブロック要素にして縦に積む */
-            margin-top: 6px; /* 上の枠との余白 */
-            opacity: 0.8;    /* 少し色を薄くしてメリハリをつける */
-        }
-
-        /* ★追加点：JavaScriptで生成される「月」のスタイル */
-        .current-month .month {
-            font-size: 28px; /* 月をドンと大きくする */
-            display: block;  /* ブロック要素にして縦に積む */
-            margin-top: -2px; /* 年との距離を近づける */
-            padding-bottom: 6px; /* 下の枠との余白 */
-        }
-
-        .month-button,
-        .week-button {
-            padding: 8px 15px;
-            background-color: #fff;
-            color: #555;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        
-        .month-button:hover,
-        .week-button:hover {
-            background-color: #f0f0f0;
-        }
-
-/* 週移動ボタンのコンテナ（下段） */
-        .week-button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px; /* カレンダー本体との距離 */
-        }
-
-        .calendar {
-            width: 100%;
-            border: 1px solid #cfcfcf;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #fff;
-        }
-
-        .calendar table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-
-        .calendar th {
-            background-color: #f1f8e9;
-            color: #33691e;
-            padding: 8px 2px;
-            font-size: 12px;
-            border-bottom: 1px solid #c5e1a5;
-        }
-
-        .calendar td {
-            padding: 10px 2px;
-            text-align: center;
-            border: 1px solid #eee;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        /* ◯のスタイル（予約可能） */
-        .available {
-            color: #2e7d32; /* 緑色の丸 */
-            font-weight: bold;
-        }
-
-        /* ✕のスタイル（予約不可） */
-        .unavailable {
-            color: #fdfdfd;
-            background-color: #c5c5c5;
+        .submit-button:disabled {
+            background-color: #bdbdbd;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
-        /* 選択中の日時 */
-        .calendar td.selected {
-            background-color: #66bb6a !important; /* 緑背景 */
-            color: #fff !important;
-            border-radius: 4px;
+        /* 希望日時（日付・時間のセレクトボックス） */
+        .datetime-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .placeholder {
+            display: block;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .dt-grid {
+            display: flex;
+            gap: 10px;
+        }
+
+        .datetime-input {
+            flex: 1;
+            min-width: 0;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #fafafa;
+            color: #333;
+            cursor: pointer;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%232e7d32%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 10px auto;
         }
 
         /* 選択中のメニュー表示エリア */
@@ -354,7 +252,7 @@
             text-align: center;
             margin-top: 15px;
         }
-        
+
         #selected-menus-display::before {
             content: "選択中のメニュー（最大3つまで）";
             display: block;
@@ -362,7 +260,6 @@
             font-size: 14px;
             color: #555;
             margin-bottom: 10px;
-            border-bottom: 1px dashed #ccc;
             padding-bottom: 5px;
             border: none;
             background: none;
@@ -417,15 +314,11 @@
             padding: 10px 0;
             border-bottom: 1px dashed #ddd;
         }
-        
+
         .info-row p {
             margin: 0;
             font-size: 14px;
             color: #333;
-        }
-        
-        hr {
-            display: none; /* HRタグは非表示にしてborderで対応 */
         }
 
         .edit-button {
@@ -436,6 +329,8 @@
             padding: 4px 10px;
             font-size: 12px;
             cursor: pointer;
+            flex-shrink: 0;
+            margin-left: 10px;
         }
 
         .edit-button:hover {
@@ -452,7 +347,7 @@
             background: none;
             border: none;
         }
-        
+
         .info-text a {
             color: #039be5;
             text-decoration: none;
@@ -465,12 +360,12 @@
             right: 10px;
             top: 80%;
             transform: translateY(-50%);
-            background: #66bb6a; /* ナビも緑に */
+            background: #66bb6a;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 5px;
-            border-radius: 30px; /* 角丸を強く */
+            border-radius: 30px;
             z-index: 1000;
             width: 40px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
@@ -486,51 +381,14 @@
             width: 100%;
             height: 50px;
         }
-        
+
         .side-nav a span {
             font-size: 18px;
             margin-bottom: -5px;
         }
-        
+
         .side-nav a i {
             font-size: 20px;
-        }
-
-        /* ローディング */
-        .loading-spinner {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            z-index: 9999;
-        }
-        
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #66bb6a;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px auto;
-        }
-        
-        .loading-text {
-            color: #66bb6a;
-            font-weight: bold;
-            font-size: 14px;
-            text-shadow: none;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         /* メニューセクションの表示制御 */
@@ -546,7 +404,7 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         /* スマホ調整 */
         @media (max-width: 600px) {
             .container {
@@ -560,7 +418,6 @@
                 margin: -15px -15px 20px -15px;
             }
         }
-        
     </style>
 </head>
 
@@ -576,10 +433,10 @@
         <h1>カイロ クリニック　ぴいす<br>予約フォーム
         </h1>
         <div class="info-text">
-  当日予約をご希望の方はこちらから<br>
-  電話番号：
-  <a href="tel:09020025386" class="tel-link">090-2002-5386</a>
-</div>
+            当日予約をご希望の方はこちらから<br>
+            電話番号：
+            <a href="tel:09020025386" class="tel-link">090-2002-5386</a>
+        </div>
         <div class="label">お客様名<span class="required">必須</span></div>
         <input type="text" id="name" placeholder="お名前を入力してください" oninput="saveInput('name')">
 
@@ -587,7 +444,6 @@
         <input type="tel" id="phone" placeholder="電話番号を入力してください" oninput="saveInput('phone')">
 
         <div class="label" id="course">メニューをお選びください<span class="required">必須</span></div>
-        <div class="info-text">※メニューを選択すると空き状況のカレンダーが表示されます</div>
         <div class="menu-sections">
             <button type="button" onclick="showMenu('male')">新規の方</button>
             <button type="button" onclick="showMenu('female')">2回目以降の方</button>
@@ -621,44 +477,40 @@
             </div>
         </div>
 
-        <div class="label">希望日時<span class="required">必須</span></div>
-                <div class="info-text">
-  当日予約をご希望の方はこちらから<br>
-  電話番号：
-  <a href="tel:09020025386" class="tel-link">090-2002-5386</a>
-</div>
+        <div class="info-text">
+            ※ご希望の日時を第三希望までお選びください。<br>
+            送信後、当店からの返信をもってご予約確定となります。<br>
+            当日予約をご希望の方はお電話ください：
+            <a href="tel:09020025386" class="tel-link">090-2002-5386</a>
+        </div>
 
-<div class="calendar-container">
-            
-            <div class="month-button-container">
-                <button class="month-button" onclick="previousmonth()">前月</button>
-                <button class="month-button" onclick="nextmonth()">翌月</button>
+        <div class="labelkibounitizi" id="kibou1">第一希望日時<span class="required">必須</span></div>
+        <div class="datetime-wrapper">
+            <span class="placeholder" id="placeholder1">▼ タップして日時を選択</span>
+            <input type="hidden" id="date1" name="date1">
+            <div class="dt-grid">
+                <select id="date1_day" class="datetime-input" aria-label="第一希望の日付を選択"></select>
+                <select id="date1_time" class="datetime-input" aria-label="第一希望の時間を選択"></select>
             </div>
+        </div>
 
-            <div class="current-month-container">
-                <span class="current-month" id="currentMonth">月</span>
+        <div class="labelkibounitizi" id="kibou2">第二希望日時<span class="required">必須</span></div>
+        <div class="datetime-wrapper">
+            <span class="placeholder" id="placeholder2">▼ タップして日時を選択</span>
+            <input type="hidden" id="date2" name="date2">
+            <div class="dt-grid">
+                <select id="date2_day" class="datetime-input" aria-label="第二希望の日付を選択"></select>
+                <select id="date2_time" class="datetime-input" aria-label="第二希望の時間を選択"></select>
             </div>
+        </div>
 
-            <div class="week-button-container">
-                <button class="week-button" onclick="previousWeek()">前週</button>
-                <button class="week-button" onclick="nextWeek()">翌週</button>
-            </div>
-
-            <div id="calendar1" class="calendar">
-                <table>
-                    <thead>
-                        <tr id="calendar-header">
-                            <th>時間</th>
-                            <th></th><th></th><th></th><th></th><th></th><th></th><th></th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            
-            <div class="loading-spinner" id="loadingSpinner">
-                <div class="spinner"></div>
-                <div class="loading-text">読み込み中...</div>
+        <div class="labelkibounitizi" id="kibou3">第三希望日時<span class="optional">任意</span></div>
+        <div class="datetime-wrapper">
+            <span class="placeholder" id="placeholder3">▼ タップして日時を選択</span>
+            <input type="hidden" id="date3" name="date3">
+            <div class="dt-grid">
+                <select id="date3_day" class="datetime-input" aria-label="第三希望の日付を選択"></select>
+                <select id="date3_time" class="datetime-input" aria-label="第三希望の時間を選択"></select>
             </div>
         </div>
 
@@ -666,49 +518,26 @@
         <textarea id="message" rows="4" placeholder="メッセージを入力してください"></textarea>
 
         <div class="label">ご予約内容</div>
-        <div id="displayInfo"></div> <button class="submit-button" onclick="submitForm()" div id="section-message">予約を行う</button>
+        <div id="displayInfo"></div>
+        <button class="submit-button" id="section-message" onclick="submitForm()">予約希望を送信する</button>
     </div>
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
-        let visitCount = '';
-        let selectedMenu = '';
-        let selectedSymptom = [];  // 配列として定義
-        let selectedFullDate = '';
-        let currentDate = new Date();
-        let availabilityCache = {};
-        let irradiationsCount = ''; let totalAmount = 0; // 合計金額を格納する変数
-        let menuPrice = 0; // メニューの価格
-        let optionsPrice = 0; // オプションの合計価格
+        // =====================================================
+        // 設定（変更する場合はここを編集）
+        // =====================================================
+        const LIFF_ID = '2008732385-eWlxuYUj';
 
-        document.addEventListener('DOMContentLoaded', function () {
-            liff.init({
-                liffId: '2008732385-eWlxuYUj'
-            }).then(() => {
-                console.log('LIFF初期化成功');
-            }).catch((err) => {
-                console.log('LIFF初期化失敗', err);
-            });
+        // 希望日時の選択肢
+        const OPEN_TIME = 9 * 60;     // 受付開始 09:00（分）
+        const CLOSE_TIME = 21 * 60;   // 施術終了の上限 21:00（分）※この時刻までに終わる開始時間のみ選べる
+        const TIME_STEP = 30;         // 時間の刻み（分）
+        const DATE_START_OFFSET = 1;  // 何日後から選べるか（1 = 翌日から。当日は電話受付のため）
+        const DATE_RANGE_DAYS = 60;   // 何日分の日付を選択肢に出すか
 
-            fetchAvailability(currentDate);
-        });
-
-        // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
-        let visitTimes = {
-            '1回目': 0,
-            '2回目以降': 0
-        };
-
-        let selectedVisitTime = 0; // 訪問回数で選択された時間
-
-        // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
-        let irradiationsTimes = {
-            '美白パック': 0
-        };
-
-        let selectedirradiationsTime = 0; // 訪問回数で選択された時間
-
-        let menuTimes = {
+        // メニューごとの所要時間（分）※ボタンの文字と完全一致させる
+        const menuTimes = {
             '姿勢矯正': 90,
             'パーソナルトレーニング': 90,
             'フェイシャルエステ＋骨盤矯正': 120,
@@ -716,24 +545,46 @@
             '姿勢矯正.': 60,
             'パーソナルトレーニング.': 60
         };
+        const MAX_MENUS = 3;          // 同時に選べるメニュー数
+        const DEFAULT_DURATION = 60;  // メニュー未選択時に時間の選択肢を計算するための仮の所要時間
 
+        // =====================================================
+        // 状態
+        // =====================================================
+        let selectedMenu = '';      // 新規の方 / 2回目以降の方
+        let selectedSymptom = [];   // [{ category, name }]
+        let selectedMenuTime = 0;   // 所要時間の合計（分）
+        let menuPrice = 0;          // 合計金額
+        let isSubmitting = false;
 
-        let selectedMenuTime = 0;
+        const JP_WD = ['日', '月', '火', '水', '木', '金', '土'];
+        const DATE_IDS = ['date1', 'date2', 'date3'];
+        const DATE_LABELS = ['第一希望', '第二希望', '第三希望'];
+        const pad = n => String(n).padStart(2, '0');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            liff.init({
+                liffId: LIFF_ID
+            }).then(() => {
+                console.log('LIFF初期化成功');
+            }).catch((err) => {
+                console.log('LIFF初期化失敗', err);
+            });
+
+            // 前回の入力内容を復元
+            const savedName = localStorage.getItem('name');
+            const savedPhone = localStorage.getItem('phone');
+            if (savedName) document.getElementById('name').value = savedName;
+            if (savedPhone) document.getElementById('phone').value = savedPhone;
+
+            updateDisplayInfo();
+        });
 
         // 入力内容をローカルストレージに保存
         function saveInput(id) {
             const value = document.getElementById(id).value;
             localStorage.setItem(id, value);
         }
-
-        // ページが読み込まれたときに前回の入力内容を復元
-        document.addEventListener('DOMContentLoaded', function () {
-            const savedName = localStorage.getItem('name');
-            const savedPhone = localStorage.getItem('phone');
-
-            if (savedName) document.getElementById('name').value = savedName;
-            if (savedPhone) document.getElementById('phone').value = savedPhone;
-        });
 
         // スムーズスクロール
         document.querySelectorAll('.side-nav a').forEach(anchor => {
@@ -750,57 +601,6 @@
             });
         });
 
-        function updateDisplayInfo() {
-            const name = document.getElementById('name').value;
-            const visitCountText = visitCount ? `<span style="color:#0c0c0c;"><strong>来店回数</strong></span>：${visitCount}` : '・来店回数が未選択です';
-            const selectedMenuText = selectedMenu ? `<span style="color#0c0c0c;"><strong>コース</strong></span>：${selectedMenu}` : '・コースが未選択です';
-
-            const selectedSymptomText = selectedSymptom.length > 0
-                ? `<span style="color:#0c0c0c;"><strong>メニュー</strong></span><br>・${selectedSymptom.map(item => `《${item.category}》${item.name}`).join('<br>・')}`
-                : '・メニューが未選択です';
-
-            const irradiationsText = irradiationsCount
-                ? `<span style="color:#0c0c0c;"><strong>オプション</strong></span><br>・${irradiationsCount.split(', ').join('<br>・')}`
-                : '・オプション無し';
-
-            let totalMinutes = selectedMenuTime + selectedirradiationsTime + selectedVisitTime;
-            let hours = Math.floor(totalMinutes / 60);
-            let minutes = totalMinutes % 60;
-            let totalTimeText = `<span style="color:#0c0c0c;"><strong>所要時間</strong></span>：${hours > 0 ? hours + '時間' : ''}${minutes}分`;
-
-            const totalAmountText = `<span style="color:#0c0c0c;"><strong>合計金額</strong></span>：¥${menuPrice + optionsPrice}`;
-            const selectedDateText = selectedFullDate ? `<span style="color:#0c0c0c;"><strong>希望日時</strong></span>：${selectedFullDate}` : '・日時が未選択です';
-
-            // 修正ボタン付きのHTMLを作成
-            document.getElementById('displayInfo').innerHTML = `
-        <div class="info-row">
-            <p><span style="color:#0c0c0c;"><strong>お名前</strong></span>：${name}</p>
-            <button class="edit-button" onclick="scrollToElement('name')">修正</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${selectedMenuText}</p>
-            <button class="edit-button" onclick="scrollToElement('course')">修正</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${selectedSymptomText}</p>
-            <button class="edit-button" onclick="scrollToElement('male'); scrollToElement('female'); scrollToElement('whitening');">修正</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${selectedDateText}</p>
-            <button class="edit-button" onclick="scrollToElement('calendar1')">修正</button>
-        </div>
-        <hr>
-        <div class="info-row">
-            <p>${totalAmountText}</p>
-        </div>
-        <hr>
-    `;
-        }
-
-        // スクロール関数
         function scrollToElement(id) {
             const element = document.getElementById(id);
             if (element) {
@@ -808,779 +608,365 @@
             }
         }
 
-        // 各ボタンや入力フィールドでupdateDisplayInfoを呼び出すようにする
+        function formatDuration(totalMinutes) {
+            const hours = Math.floor(totalMinutes / 60);
+            const minutes = totalMinutes % 60;
+            return `${hours > 0 ? hours + '時間' : ''}${minutes > 0 || hours === 0 ? minutes + '分' : ''}`;
+        }
+
+        // "YYYY-MM-DDTHH:MM" → "YYYY年MM月DD日(曜) HH:MM"
+        function formatDateTime(value) {
+            if (!value) return '';
+            const [dPart, tPart] = value.split('T');
+            if (!dPart || !tPart) return '';
+            const [y, m, d] = dPart.split('-').map(n => parseInt(n, 10));
+            const wd = JP_WD[new Date(y, m - 1, d).getDay()];
+            return `${y}年${pad(m)}月${pad(d)}日(${wd}) ${tPart}`;
+        }
+
+        // =====================================================
+        // ご予約内容（確認欄）
+        // =====================================================
+        function updateDisplayInfo() {
+            const name = document.getElementById('name').value;
+            const strong = label => `<span style="color:#0c0c0c;"><strong>${label}</strong></span>`;
+
+            const selectedMenuText = selectedMenu
+                ? `${strong('ご来店')}：${selectedMenu}`
+                : '・新規／2回目以降が未選択です';
+
+            const selectedSymptomText = selectedSymptom.length > 0
+                ? `${strong('メニュー')}<br>・${selectedSymptom.map(item => `《${item.category}》${item.name}`).join('<br>・')}`
+                : '・メニューが未選択です';
+
+            const dateRows = DATE_IDS.map((id, i) => {
+                const value = document.getElementById(id).value;
+                const requiredDate = i < 2;
+                const text = value
+                    ? `${strong(DATE_LABELS[i] + '日時')}<br>${formatDateTime(value)}`
+                    : (requiredDate ? `・${DATE_LABELS[i]}日時が未選択です` : `${strong(DATE_LABELS[i] + '日時')}<br>なし`);
+                return `
+        <div class="info-row">
+            <p>${text}</p>
+            <button class="edit-button" onclick="scrollToElement('kibou${i + 1}')">修正</button>
+        </div>`;
+            }).join('');
+
+            document.getElementById('displayInfo').innerHTML = `
+        <div class="info-row">
+            <p>${strong('お名前')}：${escapeHtml(name)}</p>
+            <button class="edit-button" onclick="scrollToElement('name')">修正</button>
+        </div>
+        <div class="info-row">
+            <p>${selectedMenuText}</p>
+            <button class="edit-button" onclick="scrollToElement('course')">修正</button>
+        </div>
+        <div class="info-row">
+            <p>${selectedSymptomText}</p>
+            <button class="edit-button" onclick="scrollToElement('course')">修正</button>
+        </div>
+        ${dateRows}
+        <div class="info-row">
+            <p>${strong('所要時間')}：${selectedMenuTime > 0 ? formatDuration(selectedMenuTime) : '-'}</p>
+        </div>
+        <div class="info-row">
+            <p>${strong('合計金額')}：¥${menuPrice.toLocaleString()}</p>
+        </div>
+    `;
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
         document.getElementById('name').addEventListener('input', updateDisplayInfo);
-        document.querySelectorAll('.visit-buttons button').forEach(button => {
-            button.addEventListener('click', updateDisplayInfo);
-        });
-        document.querySelectorAll('.symptoms button').forEach(button => {
-            button.addEventListener('click', updateDisplayInfo);
-        });
-        document.querySelectorAll('.irradiations button').forEach(button => {
-            button.addEventListener('click', updateDisplayInfo);
-        });
 
-        document.querySelectorAll('.symptoms button').forEach(button => {
-            button.addEventListener('click', () => {
-                const calendarContainer = document.querySelector('.calendar-container');
+        // =====================================================
+        // メニュー選択
+        // =====================================================
+        function showMenu(menu) {
+            const selectedButton = document.querySelector(`.menu-sections button[onclick="showMenu('${menu}')"]`);
+            const alreadyActive = selectedButton && selectedButton.classList.contains('active');
+            if (alreadyActive) return; // 同じ区分を押し直しただけなら何もしない
 
-                // 選択されたメニューがあればカレンダーを表示
-                if (document.querySelectorAll('.symptoms button.active').length > 0) {
-                    calendarContainer.style.display = 'block';
-                } else {
-                    // 選択が解除された場合、カレンダーを非表示
-                    calendarContainer.style.display = 'none';
-                }
+            if (selectedButton) {
+                selectedMenu = selectedButton.innerText;
+            }
+
+            // 区分ボタンの選択状態を切り替え
+            document.querySelectorAll('.menu-sections button').forEach(button => {
+                button.classList.remove('active');
             });
-        });
+            if (selectedButton) selectedButton.classList.add('active');
 
-        // 初期状態でカレンダーを非表示にする
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('.calendar-container').style.display = 'none';
-        });
-
-        // 日付セルのクリックイベントで希望日時を更新
-        document.querySelectorAll('.calendar td').forEach(cell => {
-            cell.addEventListener('click', () => {
-                selectDate(cell);
-                updateDisplayInfo();  // 日付を選択したら即座に表示を更新
+            // セクションを切り替え、選択済みメニューはリセット
+            document.querySelectorAll('.menu-section').forEach(section => {
+                section.classList.remove('active');
+                section.querySelectorAll('.symptoms button').forEach(btn => btn.classList.remove('active'));
             });
-        });
+            document.getElementById(menu).classList.add('active');
+
+            hideTreatmentText();
+            recalcMenus();
+        }
 
         function selectSymptom(button, treatmentId) {
-            // 選択された日時をリセット
-            selectedFullDate = '';
-
-            const treatmentText = document.getElementById('treatment-text');
-            const selectedMenusDisplay = document.getElementById("selected-menus-display");
-            const selectedMenuNameDiv = document.getElementById('selected-menu-name');
-
-            // トグル
             if (button.classList.contains('active')) {
-                button.classList.remove('active'); // ← 解除
+                // 解除
+                button.classList.remove('active');
+                hideTreatmentText();
             } else {
                 const activeCount = document.querySelectorAll('.symptoms button.active').length;
-                if (activeCount >= 3) return;
-                button.classList.add('active');    // ← 選択
-            }
-
-            // 最新状態
-            const updatedSelectedButtons = document.querySelectorAll('.symptoms button.active');
-
-            // リセット
-            selectedMenuTime = 0;
-            selectedSymptom = [];
-            menuPrice = 0;
-
-            // 0件ならすべて隠す
-            if (updatedSelectedButtons.length === 0) {
-                if (treatmentText) {
-                    treatmentText.style.display = 'none';
-                    treatmentText.innerHTML = '';
+                if (activeCount >= MAX_MENUS) {
+                    alert(`メニューは最大${MAX_MENUS}つまで選択できます。`);
+                    return;
                 }
-                selectedMenusDisplay.style.display = 'none';
-                selectedMenusDisplay.innerHTML = '';
-                if (selectedMenuNameDiv) selectedMenuNameDiv.style.display = 'none';
-                return;
+                button.classList.add('active');
+                showTreatmentText(button);
             }
-
-// 選択済みから再計算
-            updatedSelectedButtons.forEach((btn) => {
-                const selectedMenuName = btn.textContent;
-                const category = btn.getAttribute('data-category');
-                selectedSymptom.push({ category, name: selectedMenuName });
-                selectedMenuTime += menuTimes[selectedMenuName] || 0;
-                
-                // ▼▼▼ 修正箇所：カンマを除去してから数値変換するように変更 ▼▼▼
-                const priceStr = btn.getAttribute('data-price') || '0';
-                menuPrice += parseInt(priceStr.replace(/,/g, ''), 10) || 0;
-                // ▲▲▲ 修正箇所ここまで ▲▲▲
-            });
-
-            // カレンダー更新
-            if (typeof fetchAvailability === 'function') {
-                fetchAvailability(currentDate);
-            }
-
-            // --- ここがポイント ---
-            // 解除クリックの場合（このボタンが非activeになった後）は詳細を表示しない
-            if (!button.classList.contains('active')) {
-                if (treatmentText) {
-                    treatmentText.style.display = 'none';
-                    treatmentText.innerHTML = '';
-                }
-            } else {
-                // 表示内容を treatmentId で分岐（未指定/不一致なら表示しない）
-                let html = '';
-                if (treatmentId === 'treatment1') {
-                    html = `<div style="text-align: left;"><strong>所要時間：90分</strong><br></div><div style="text-align: right;"><strong>料金：6,600円</strong></div>`;
-                } else if (treatmentId === 'treatment2') {
-                    html = `<div style="text-align: left;"><strong>所要時間：90分</strong><br></div><div style="text-align: right;"><strong>料金：7,700円</strong></div>`;
-                } else if (treatmentId === 'treatment3') {
-                    html = `<div style="text-align: left;"><strong>所要時間：90分</strong><br></div><div style="text-align: right;"><strong>料金：11,000円</strong></div>`;
-                 } else if (treatmentId === 'treatment4') {
-                    html = `<div style="text-align: left;"><strong>所要時間：90分</strong><br></div><div style="text-align: right;"><strong>料金：13,000円</strong></div>`;
-                } else if (treatmentId === 'treatment5') {
-                    html = `<div style="text-align: left;"><strong>所要時間：60分</strong><br></div><div style="text-align: right;"><strong>料金：5,500円</strong></div>`;
-                } else if (treatmentId === 'treatment6') {
-                    html = `<div style="text-align: left;"><strong>所要時間：60分</strong><br></div><div style="text-align: right;"><strong>料金：6,600円</strong></div>`;
-                }
-
-                // 内容が用意できた時だけ移動＆表示
-                if (html) {
-                    treatmentText.innerHTML = html;
-                    button.parentNode.insertBefore(treatmentText, button.nextSibling);
-                    treatmentText.style.display = 'block';
-                } else {
-                    treatmentText.innerHTML = '';
-                    treatmentText.style.display = 'none';
-                }
-            }
-
-            // 選択リストの描画
-            if (selectedSymptom.length > 0) {
-                selectedMenusDisplay.innerHTML = `
-            <div class="menu-items-wrapper">
-                ${selectedSymptom.map(item => `
-                    <div class="menu-item">
-                        <span>《${item.category}》<br>${item.name}</span>
-                        <button class="remove-button" data-category="${item.category}" data-name="${item.name}" onclick="removeSymptom(this)">✕</button>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-                selectedMenusDisplay.style.display = 'block';
-            } else {
-                selectedMenusDisplay.innerHTML = '';
-                selectedMenusDisplay.style.display = 'none';
-            }
-
-            updateDisplayInfo();
+            recalcMenus();
         }
 
         function removeSymptom(button) {
             const category = button.getAttribute('data-category');
             const name = button.getAttribute('data-name');
-            const container = document.getElementById("selected-menus-display");
-
-            // 所要時間が変わるため、選択済み日時はクリア
-            selectedFullDate = '';
-
-            // 1) まずUI上の該当チップを即時削除（UIを真実のソースに）
-            const itemEl = button.closest('.menu-item');
-            if (itemEl) itemEl.remove();
-
-            // 2) 元ボタン（.symptoms）を非アクティブ化
             const srcBtn = [...document.querySelectorAll('.symptoms button')].find(
                 b => b.textContent === name && b.getAttribute('data-category') === category
             );
             if (srcBtn) srcBtn.classList.remove('active');
+            hideTreatmentText();
+            recalcMenus();
+        }
 
-            // 3) 配列は「今アクティブな症状ボタン」から再構築してズレを無くす
-            selectedSymptom = [...document.querySelectorAll('.symptoms button.active')].map(b => ({
-                category: b.getAttribute('data-category'),
-                name: b.textContent
-            }));
-
-// 4) 時間・価格を再計算（activeボタンから）
+        // 選択中ボタンからメニュー・所要時間・金額を再計算して表示を更新
+        function recalcMenus() {
+            selectedSymptom = [];
             selectedMenuTime = 0;
             menuPrice = 0;
-            selectedSymptom.forEach(item => {
-                selectedMenuTime += (menuTimes[item.name] || 0);
-                const btn = [...document.querySelectorAll('.symptoms button')].find(
-                    b => b.textContent === item.name && b.getAttribute('data-category') === item.category
-                );
-                
-                // ▼▼▼ 修正箇所：ここもカンマを除去してから計算するように変更 ▼▼▼
-                if (btn) {
-                    const priceStr = btn.getAttribute('data-price') || '0';
-                    menuPrice += parseInt(priceStr.replace(/,/g, ''), 10);
-                }
-                // ▲▲▲ 修正箇所ここまで ▲▲▲
+
+            document.querySelectorAll('.symptoms button.active').forEach(btn => {
+                const name = btn.textContent;
+                selectedSymptom.push({ category: btn.getAttribute('data-category'), name: name });
+                selectedMenuTime += menuTimes[name] || 0;
+                const priceStr = btn.getAttribute('data-price') || '0';
+                menuPrice += parseInt(priceStr.replace(/,/g, ''), 10) || 0;
             });
 
-            // 5) カレンダー再取得
-            if (typeof fetchAvailability === 'function') {
-                fetchAvailability(currentDate);
-            }
-
-            // 6) 詳細テキストは閉じる
-            const treatmentText = document.getElementById("treatment-text");
-            if (treatmentText) {
-                treatmentText.style.display = 'none';
-                treatmentText.innerHTML = '';
-            }
-
-            // 7) 「配列の長さ」ではなく「UIにチップが残っているか」で表示制御
-            if (container) {
-                const remain = container.querySelectorAll('.menu-item').length;
-                if (remain === 0) {
-                    container.style.display = 'none';
-                    container.innerHTML = '';
-                    const selectedMenuNameDiv = document.getElementById('selected-menu-name');
-                    if (selectedMenuNameDiv) selectedMenuNameDiv.style.display = 'none';
-                } else {
-                    container.style.display = 'block';
-                }
-            }
-
+            renderSelectedMenus();
+            refreshTimeOptions(); // 所要時間が変わると選べる開始時間も変わる
             updateDisplayInfo();
         }
 
-        function updateSelectedMenusDisplay() {
-            const selectedMenusDisplay = document.getElementById("selected-menus-display");
-
-            if (selectedSymptom.length > 0) {
-                selectedMenusDisplay.innerHTML = `
+        function renderSelectedMenus() {
+            const display = document.getElementById('selected-menus-display');
+            if (selectedSymptom.length === 0) {
+                display.innerHTML = '';
+                display.style.display = 'none';
+                return;
+            }
+            display.innerHTML = `
             <div class="menu-items-wrapper">
                 ${selectedSymptom.map(item => `
                     <div class="menu-item">
                         <span>《${item.category}》<br>${item.name}</span>
-                        <button class="remove-button" data-category="${item.category}" data-name="${item.name}" onclick="removeSymptom(this)">✕</button>
+                        <button type="button" class="remove-button" data-category="${item.category}" data-name="${item.name}" onclick="removeSymptom(this)">✕</button>
                     </div>
                 `).join('')}
             </div>
         `;
-                selectedMenusDisplay.style.display = 'block';
+            display.style.display = 'block';
+        }
+
+        // 押したメニューの所要時間・料金をボタンの直下に表示
+        function showTreatmentText(button) {
+            const treatmentText = document.getElementById('treatment-text');
+            const minutes = menuTimes[button.textContent] || 0;
+            const price = parseInt((button.getAttribute('data-price') || '0').replace(/,/g, ''), 10) || 0;
+            treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：${minutes}分</strong><br></div><div style="text-align: right;"><strong>料金：${price.toLocaleString()}円</strong></div>`;
+            button.parentNode.insertBefore(treatmentText, button.nextSibling);
+            treatmentText.style.display = 'block';
+        }
+
+        function hideTreatmentText() {
+            const treatmentText = document.getElementById('treatment-text');
+            treatmentText.style.display = 'none';
+            treatmentText.innerHTML = '';
+        }
+
+        // =====================================================
+        // 希望日時（第一〜第三）
+        // =====================================================
+        function buildDateOptions(selectEl) {
+            const d = new Date();
+            d.setDate(d.getDate() + DATE_START_OFFSET);
+            selectEl.innerHTML = '<option value="" selected>日付を選択</option>';
+            for (let i = 0; i < DATE_RANGE_DAYS; i++) {
+                const y = d.getFullYear();
+                const m = pad(d.getMonth() + 1);
+                const day = pad(d.getDate());
+                const opt = document.createElement('option');
+                opt.value = `${y}-${m}-${day}`;
+                opt.textContent = `${m}/${day}（${JP_WD[d.getDay()]}）`;
+                selectEl.appendChild(opt);
+                d.setDate(d.getDate() + 1);
+            }
+        }
+
+        // 選択中メニューの所要時間で、CLOSE_TIME までに終わる開始時間だけを選択肢にする
+        function buildTimeOptions(selectEl) {
+            const previous = selectEl.value;
+            const duration = selectedMenuTime || DEFAULT_DURATION;
+            const lastStart = CLOSE_TIME - duration;
+
+            selectEl.innerHTML = '<option value="">時間を選択</option>';
+            let keep = false;
+            for (let t = OPEN_TIME; t <= lastStart; t += TIME_STEP) {
+                const val = `${pad(Math.floor(t / 60))}:${pad(t % 60)}`;
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectEl.appendChild(opt);
+                if (val === previous) keep = true;
+            }
+            selectEl.value = keep ? previous : '';
+        }
+
+        function updateHiddenAndPlaceholder(baseId) {
+            const day = document.getElementById(`${baseId}_day`).value;
+            const time = document.getElementById(`${baseId}_time`).value;
+            const hidden = document.getElementById(baseId);
+            const ph = document.getElementById(`placeholder${baseId.slice(-1)}`);
+
+            if (day && time) {
+                hidden.value = `${day}T${time}`;
+                ph.style.display = 'none';
             } else {
-                selectedMenusDisplay.innerHTML = '';
-                selectedMenusDisplay.style.display = 'none';
+                hidden.value = '';
+                ph.style.display = 'block';
+                ph.textContent = day ? '▼ 時間を選択してください'
+                    : (time ? '▼ 日付を選択してください' : '▼ タップして日時を選択');
             }
         }
 
-        function selectirradiations(button) {
-            // 選択された日時をリセット
-            selectedFullDate = '';
-
-            // ボタンの選択状態を切り替える
-            button.classList.toggle('active');
-
-            // 選択されたオプションを取得
-            const selectedButtons = document.querySelectorAll('.irradiations button.active');
-            const selectedIrradiations = Array.from(selectedButtons).map(btn => btn.innerText);
-            irradiationsCount = selectedIrradiations.join(', ');
-
-            // すべてのオプションの価格を再計算
-            optionsPrice = 0; // 全体をリセットして再計算
-            let totalirradiationsTime = 0; // 選択されたすべてのオプションの合計時間
-            selectedButtons.forEach(btn => {
-                const price = parseInt(btn.getAttribute('data-price'), 10);
-                optionsPrice += price;
-
-                // 各オプションの時間を加算
-                const irradiationName = btn.innerText;
-                const irradiationTime = irradiationsTimes[irradiationName] || 0;
-                totalirradiationsTime += irradiationTime;
+        function refreshTimeOptions() {
+            DATE_IDS.forEach(id => {
+                buildTimeOptions(document.getElementById(`${id}_time`));
+                updateHiddenAndPlaceholder(id);
             });
-
-            // selectedirradiationsTimeに合計時間を設定
-            selectedirradiationsTime = totalirradiationsTime;
-
-            console.log('選択されたオプションの合計時間:', selectedirradiationsTime);
-
-            // カレンダーを更新するために取得する日付を渡す
-            fetchAvailability(currentDate);
-
-            // 表示を更新
-            updateDisplayInfo();
         }
 
-        function updateTotalAmount() {
-            totalAmount = menuPrice + optionsPrice; // オプションの価格も含める
-            updateDisplayInfo(); // 表示を更新
-        }
+        function initPicker(baseId) {
+            const daySel = document.getElementById(`${baseId}_day`);
+            const timeSel = document.getElementById(`${baseId}_time`);
+            buildDateOptions(daySel);
+            buildTimeOptions(timeSel);
 
-        function selectVisit(element) {
-            // 選択された日時をリセット
-            selectedFullDate = '';
-
-            document.getElementById('firstVisit').classList.remove('active');
-            document.getElementById('repeatVisit').classList.remove('active');
-            element.classList.add('active');
-            visitCount = element.innerText;
-
-            // 選択された訪問回数に対応する時間を取得
-            selectedVisitTime = visitTimes[visitCount];
-
-            console.log('選択された訪問回数の時間:', selectedVisitTime);
-
-            // カレンダーを更新するために取得する日付を渡す
-            fetchAvailability(currentDate);
-        }
-
-        function showMenu(menu) {
-            // `treatment-text` を非表示にする
-            document.getElementById("treatment-text").style.display = "none";
-
-            // 選択されたメニューの名前を取得
-            let selectedButton = document.querySelector(`.menu-sections button[onclick="showMenu('${menu}')"]`);
-            if (selectedButton) {
-                selectedMenu = selectedButton.innerText;
-            }
-
-            // すべてのメニューボタンの選択状態をリセット
-            document.querySelectorAll('.menu-sections button').forEach(button => {
-                button.classList.remove('active');
-            });
-
-            // 選択されたメニューセクションを表示
-            document.querySelectorAll('.menu-section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // 対応するメニューボタンを選択状態にする
-            if (selectedButton) {
-                selectedButton.classList.add('active');
-            }
-
-            // 選択されたメニューセクションを表示
-            document.getElementById(menu).classList.add('active');
-
-            // `treatment-text` の内容をリセット
-            document.getElementById("treatment-text").innerHTML = "";
-
-            // メニューとオプションをリセット
-            selectedSymptom = [];      // メニューのリセット
-            irradiationsCount = '';    // オプションのリセット
-            menuPrice = 0;             // メニューの価格リセット
-            optionsPrice = 0;          // オプションの価格リセット
-            totalAmount = 0;           // 合計金額リセット
-
-            // 表示を更新
-            updateDisplayInfo();
-        }
-
-        function selectDate(cell) {
-            // "unavailable" クラスが付いている場合はクリックを無効化
-            if (cell.classList.contains('unavailable')) {
-                return; // 何もせずに終了
-            }
-
-            // 既に選択されているセルの選択を解除
-            const cells = document.querySelectorAll('.calendar td');
-            cells.forEach(td => td.classList.remove('selected'));
-
-            // 新しいセルを選択状態にする
-            cell.classList.add('selected');
-
-            // 選択された日付と時間を取得
-            const selectedDay = cell.getAttribute('data-date'); // ISO形式の日付
-            const selectedTime = cell.parentElement.firstChild.textContent; // 時間
-            const date = new Date(selectedDay);
-
-            // 日付部分を「○○年○○月○○日 ○○:○○」形式に変換
-            selectedFullDate = `${date.getFullYear()}年${('0' + (date.getMonth() + 1)).slice(-2)}月${('0' + date.getDate()).slice(-2)}日 ${selectedTime}`;
-
-            // 希望日時を即座に更新
-            updateDisplayInfo();
-        }
-
-        function submitForm() {
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                phone: document.getElementById('phone').value.trim(),
-                selectedMenu: selectedMenu,
-                selectedSymptom: selectedSymptom && selectedSymptom.length > 0 ? selectedSymptom : null, // 空の選択肢をチェック
-                irradiationsCount: irradiationsCount,
-                dates: selectedFullDate ? [selectedFullDate] : null, // 空チェック
-                message: document.getElementById('message').value.trim()
+            const onChange = () => {
+                updateHiddenAndPlaceholder(baseId);
+                updateDisplayInfo();
             };
+            daySel.addEventListener('change', onChange);
+            timeSel.addEventListener('change', onChange);
+        }
 
-            // フォームデータのチェック
-            if (!formData.name) {
+        DATE_IDS.forEach(id => initPicker(id));
+
+        // =====================================================
+        // 送信
+        // =====================================================
+        function submitForm() {
+            if (isSubmitting) return;
+
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const dates = DATE_IDS.map(id => document.getElementById(id).value);
+
+            if (!name) {
                 alert('お名前を入力してください。');
+                scrollToElement('name');
                 return;
             }
 
-            if (!formData.phone) {
+            if (!phone) {
                 alert('電話番号を入力してください。');
+                scrollToElement('phone');
                 return;
             }
 
-            if (!formData.selectedSymptom) {
+            if (selectedSymptom.length === 0) {
                 alert('メニューを選択してください。');
+                scrollToElement('course');
                 return;
             }
 
-            if (!formData.dates) {
-                alert('希望日時を選択してください。');
+            if (!dates[0]) {
+                alert('第一希望日時を選択してください。');
+                scrollToElement('kibou1');
                 return;
             }
 
-            // selectedSymptomを文字列に整形
-            const selectedSymptomText = formData.selectedSymptom
-                ? formData.selectedSymptom.map(item => `${item.name}`).join(',')
-                : 'メニュー未選択';
+            if (!dates[1]) {
+                alert('第二希望日時を選択してください。');
+                scrollToElement('kibou2');
+                return;
+            }
 
-            // irradiationsCountの整形（nullチェック）
-            const irradiationsText = formData.irradiationsCount || 'なし';
+            // 第三希望は任意。ただし日付か時間の片方だけ選ばれている場合は確認する
+            const day3 = document.getElementById('date3_day').value;
+            const time3 = document.getElementById('date3_time').value;
+            if ((day3 || time3) && !dates[2]) {
+                alert('第三希望日時は、日付と時間の両方を選択してください。\n（不要な場合は両方とも未選択に戻してください）');
+                scrollToElement('kibou3');
+                return;
+            }
+
+            // 同じ日時の重複チェック
+            const filled = dates.filter(d => d);
+            if (new Set(filled).size !== filled.length) {
+                alert('希望日時が重複しています。\nそれぞれ別の日時を選択してください。');
+                scrollToElement('kibou1');
+                return;
+            }
+
+            const selectedSymptomText = selectedSymptom.map(item => item.name).join(',');
+
+            const text = [
+                '【予約希望フォーム】',
+                `お名前：${name}`,
+                `電話番号：${phone}`,
+                `ご来店回数：${selectedMenu}`,
+                `メニュー：${selectedSymptomText}`,
+                `所要時間：${formatDuration(selectedMenuTime)}`,
+                `合計金額：¥${menuPrice.toLocaleString()}`,
+                `第一希望：${formatDateTime(dates[0])}`,
+                `第二希望：${formatDateTime(dates[1])}`,
+                `第三希望：${dates[2] ? formatDateTime(dates[2]) : 'なし'}`,
+                `メッセージ：${message}`
+            ].join('\n');
+
+            const submitButton = document.getElementById('section-message');
+            isSubmitting = true;
+            submitButton.disabled = true;
 
             liff.sendMessages([{
                 type: 'text',
-                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.selectedMenu}\nメニュー：${selectedSymptomText}\n希望日時：\n${formData.dates[0]}\nメッセージ：${formData.message}`
+                text: text
             }]).then(() => {
-                /* メッセージ送信成功時の処理 */
-                alert('当日キャンセルは無いようにお願いいたします。');
-                /* LIFFウィンドウを閉じる */
+                alert('ご予約希望を送信しました。\n当店からの返信をもってご予約確定となります。\n\n当日キャンセルは無いようにお願いいたします。');
                 liff.closeWindow();
             }).catch((err) => {
-                /* メッセージ送信失敗時の処理 */
                 console.error('メッセージの送信に失敗しました', err);
+                alert('送信に失敗しました。\nLINEアプリ内でフォームを開き直して、もう一度お試しください。');
+                isSubmitting = false;
+                submitButton.disabled = false;
             });
-        }
-
-        function formatDate(dateStr) {
-            if (!dateStr) return '';
-            const date = new Date(dateStr);
-            return `${date.getFullYear()}年${('0' + (date.getMonth() + 1)).slice(-2)}月${('0' + date.getDate()).slice(-2)}日 ${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
-        }
-
-        async function fetchAvailability(date) {
-            const startTime = new Date(date);
-            const endTime = new Date(date);
-            endTime.setDate(endTime.getDate() + 7);
-
-            const cacheKey = startTime.toISOString() + endTime.toISOString();
-
-            // キャッシュを確認
-            if (availabilityCache[cacheKey]) {
-                console.log('Using cached data');
-                updateCalendar(availabilityCache[cacheKey].availability, availabilityCache[cacheKey].businessDays);
-                return;
-            }
-
-            const url = 'https://script.google.com/macros/s/AKfycbxYdK5U8D1lGE4rZY3DKraO1iQnS4hW2BBy94lnfW5Eg06kWol07LqrvHFMDiUYnpRm/exec' +
-                `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
-
-            try {
-                showLoadingSpinner(); // Show loading spinner
-                const response = await fetch(url);
-                const data = await response.json();
-                console.log(data);
-
-                // 営業日の情報を抽出
-                const businessDays = data.filter(event => event.summary === "営業日").map(event => {
-                    return {
-                        start: new Date(event.startTime),
-                        end: new Date(event.endTime)
-                    };
-                });
-
-                // データをキャッシュに保存
-                availabilityCache[cacheKey] = { availability: data, businessDays: businessDays };
-
-                updateCalendar(data, businessDays);
-            } catch (error) {
-                console.error('Error fetching availability:', error);
-            } finally {
-                hideLoadingSpinner(); // Hide loading spinner
-            }
-        }
-
-        function updateCalendar(availability, businessDays) {
-            const calendar = document.getElementById('calendar1');
-            const table = calendar.querySelector('table tbody');
-
-            const times = [
-                '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
-                '12:00', '12:30', '13:00', '13:30',
-                '14:00', '14:30', '15:00', '15:30',
-                '16:00', '16:30', '17:00', '17:30',
-                '18:00', '18:30', '19:00', '19:30',
-                '20:00', '20:30', '21:00'
-            ];
-
-            if (table.rows.length === 0) {
-                for (const time of times) {
-                    const row = document.createElement('tr');
-                    const timeCell = document.createElement('td');
-                    timeCell.textContent = time;
-                    row.appendChild(timeCell);
-
-                    for (let i = 0; i < 7; i++) {
-                        const cell = document.createElement('td');
-                        cell.addEventListener('click', () => selectDate(cell));
-                        row.appendChild(cell);
-                    }
-
-                    table.appendChild(row);
-                }
-            }
-
-            // テーブルのヘッダーを更新
-            updateCalendarHeader(currentDate);
-
-            // 各セルを空白にリセットし、クラスもリセット
-            for (let row of table.rows) {
-                for (let i = 1; i < row.cells.length; i++) {
-                    row.cells[i].textContent = '';
-                    row.cells[i].removeAttribute('data-date');
-                    row.cells[i].classList.remove('available', 'unavailable', 'selected');
-                }
-            }
-
-            // 現在の日時を取得
-            const now = new Date();
-
-            // テーブルの内容を更新
-            for (let i = 0; i < 7; i++) {
-                const day = new Date(currentDate);
-                day.setDate(day.getDate() + i);
-
-                let businessEventTimes = []; // 営業日のイベント時間帯を記録する配列
-
-                availability.forEach(slot => {
-                    const eventStart = new Date(slot.startTime);
-                    const eventEnd = new Date(slot.endTime);
-                    if (eventStart.toDateString() === day.toDateString() && slot.title === "営業日") {
-                        businessEventTimes.push({ start: eventStart, end: eventEnd });
-                    }
-                });
-
-                for (let j = 0; j < times.length; j++) {
-                    const cell = table.rows[j].cells[i + 1];
-
-                    const slotStart = new Date(day);
-                    slotStart.setHours(parseInt(times[j].split(':')[0]), parseInt(times[j].split(':')[1]), 0, 0);
-
-                    let slotEnd = new Date(slotStart);
-                    let menuDuration = selectedMenuTime || 10;
-                    let visitDuration = selectedVisitTime || 0;
-                    let irradiationsDuration = selectedirradiationsTime || 0;
-
-                    // 仮に終了時間を計算
-                    slotEnd.setMinutes(slotStart.getMinutes() + menuDuration + visitDuration + irradiationsDuration);
-
-                    // 日付を跨ぐ場合は✕
-                    if (slotEnd.getDate() !== slotStart.getDate()) {
-                        cell.textContent = '✕';
-                        cell.classList.add('unavailable');
-                        continue;
-                    }
-
-                    // 18時以降に終了する予約は✕
-                    if (slotEnd.getHours() === 21 && slotEnd.getMinutes() > 0 || slotEnd.getHours() > 21) {
-                        cell.textContent = '✕';
-                        cell.classList.add('unavailable');
-                        continue;
-                    }
-
-// 🔴 当日はすべて✕（←追加）
-if (day.toDateString() === now.toDateString()) {
-    cell.textContent = '✕';
-    cell.classList.add('unavailable');
-    continue;
-}
-
-                    // 過去の時間は✕
-                    if (slotStart < now) {
-                        cell.textContent = '✕';
-                        cell.classList.add('unavailable');
-                        continue;
-                    }
-
-                    // 当日の営業時間内かどうか（Googleカレンダーイベント）
-                    const isBusinessEventTime = businessEventTimes.some(event => {
-                        return slotStart >= event.start && slotEnd <= event.end;
-                    });
-
-                    // 通常の営業日（手動設定されたbusinessDays）
-                    const isBusinessDay = businessDays.some(businessDay => {
-                        const businessDayStart = new Date(businessDay.start);
-                        const businessDayEnd = new Date(businessDay.end);
-                        return slotStart >= businessDayStart && slotEnd <= businessDayEnd;
-                    });
-
-                    // 営業日以外の重複イベントを取得
-                    const relevantEvents = availability.filter(slot => {
-                        const eventStart = new Date(slot.startTime);
-                        const eventEnd = new Date(slot.endTime);
-                        return slot.title !== "営業日" && eventStart < slotEnd && eventEnd > slotStart;
-                    });
-
-                    // 同時刻に3件以上予約があると✕
-                    let overLimit = false;
-                    for (let checkTime = new Date(slotStart.getTime()); checkTime < slotEnd; checkTime.setMinutes(checkTime.getMinutes() + 1)) {
-                        let overlapping = 1; // 自予約を含む
-                        relevantEvents.forEach(slot => {
-                            const eventStart = new Date(slot.startTime);
-                            const eventEnd = new Date(slot.endTime);
-                            if (eventStart <= checkTime && eventEnd > checkTime) {
-                                overlapping++;
-                            }
-                        });
-                        if (overlapping >= 2) {
-                            overLimit = true;
-                            break;
-                        }
-                    }
-
-                    // 最終的な可否判定
-                    if (isBusinessEventTime && !overLimit) {
-                        cell.textContent = '◯';
-                        cell.classList.add('available');
-                    } else if (isBusinessEventTime && overLimit) {
-                        cell.textContent = '✕';
-                        cell.classList.add('unavailable');
-                    } else if (isBusinessDay && !overLimit) {
-                        cell.textContent = '◯';
-                        cell.classList.add('available');
-                    } else if (!isBusinessEventTime && businessEventTimes.length > 0) {
-                        cell.textContent = '✕';
-                        cell.classList.add('unavailable');
-                    } else if (!overLimit) {
-                        cell.textContent = '◯';
-                        cell.classList.add('available');
-                    } else {
-                        cell.textContent = '✕';
-                        cell.classList.add('unavailable');
-                    }
-
-
-                    // セルにこの時間帯のデータ属性を追加（ISO形式の日時）
-                    cell.setAttribute('data-date', slotStart.toISOString());
-                }
-            }
-        }
-
-        function updateCalendarHeader(date) {
-            const headerRow = document.getElementById('calendar-header');
-            const headers = headerRow.querySelectorAll('th:not(:first-child)');
-
-            // サンプルの祝日データ（必要に応じて動的に取得も検討）
-            const holidays = [
-                '2025-02-11', // 建国記念の日
-                '2025-02-23', // 天皇誕生日
-                '2025-02-24', // 天皇誕生日 振替休日
-                '2025-03-20', // 春分の日
-                '2025-04-29', // 昭和の日
-                '2025-05-03', // 憲法記念日
-                '2025-05-04', // みどりの日
-                '2025-05-05', // こどもの日
-                '2025-05-06', // みどりの日 振替休日
-                '2025-07-21', // 海の日
-                '2025-08-11', // 山の日
-                '2025-09-15', // 敬老の日
-                '2025-09-23', // 秋分の日
-                '2025-10-13', // 体育の日
-                '2025-11-03', // 文化の日
-                '2025-11-23', // 勤労感謝の日
-                '2025-11-24', // 勤労感謝の日 振替休日
-                '2026-01-01', // 元日
-                '2026-01-12', // 成人の日
-                '2026-02-11', // 建国記念の日
-                '2026-02-23', // 天皇誕生日
-                '2026-03-20', // 春分の日
-                '2026-04-29', // 昭和の日
-                '2026-05-03', // 憲法記念日
-                '2026-05-04', // 憲法記念日 振替休日
-                '2026-05-05', // みどりの日
-                '2026-05-06', // こどもの日
-                '2026-07-20', // 海の日
-                '2026-08-11', // 山の日
-                '2026-09-21', // 敬老の日
-                '2026-09-22', // 国民の休日
-                '2026-09-23', // 秋分の日
-                '2026-10-12', // 体育の日
-                '2026-11-03', // 文化の日
-                '2026-11-23', // 勤労感謝の日
-                '2027-01-01', // 元日
-                '2027-01-11', // 成人の日
-                '2027-02-11', // 建国記念の日
-                '2027-02-23', // 天皇誕生日
-                '2027-03-20', // 春分の日
-                '2027-04-29', // 昭和の日
-                '2027-05-03', // 憲法記念日
-                '2027-05-04', // みどりの日
-                '2027-05-05', // こどもの日
-                '2027-07-19', // 海の日
-                '2027-08-11', // 山の日
-                '2027-09-20', // 敬老の日
-                '2027-09-23', // 秋分の日
-                '2027-10-11', // 体育の日
-                '2027-11-03', // 文化の日
-                '2027-11-23', // 勤労感謝の日
-                '2028-01-01', // 元日
-                '2028-01-10', // 成人の日
-                '2028-02-11', // 建国記念の日
-                '2028-02-23', // 天皇誕生日
-                '2028-03-20', // 春分の日
-                '2028-04-29', // 昭和の日
-                '2028-05-03', // 憲法記念日
-                '2028-05-04', // みどりの日
-                '2028-05-05', // こどもの日
-                '2028-07-17', // 海の日
-                '2028-08-11', // 山の日
-                '2028-09-18', // 敬老の日
-                '2028-09-22', // 秋分の日
-                '2028-10-09', // 体育の日
-                '2028-11-03', // 文化の日
-                '2028-11-23'  // 勤労感謝の日
-            ];
-
-            const startDate = new Date(date);
-            headers.forEach((th, index) => {
-                const day = new Date(startDate);
-                day.setDate(day.getDate() + index);
-
-                const dayOfWeek = ['日', '月', '火', '水', '木', '金', '土'];
-                const formattedDate = `${day.getFullYear()}-${(day.getMonth() + 1).toString().padStart(2, '0')}-${day.getDate().toString().padStart(2, '0')}`;
-                const dayString = `${day.getDate()}(${dayOfWeek[day.getDay()]})`;
-
-                th.innerHTML = dayString.replace('(', '<br>(');
-
-                // 祝日を赤色に変更（曜日判定ではなく完全一致判定）
-                if (holidays.includes(formattedDate)) {
-                    th.style.color = 'red';
-                } else if (day.getDay() === 0) { // 日曜日（赤）
-                    th.style.color = 'red';
-                } else if (day.getDay() === 6) { // 土曜日（青）
-                    th.style.color = 'blue';
-                } else {
-                    th.style.color = ''; // 通常色にリセット
-                }
-            });
-
-            // 現在の月を表示
-            const currentMonthElement = document.getElementById('currentMonth');
-            currentMonthElement.innerHTML = `<span class="year">${startDate.getFullYear()}年</span><br><span class="month">${startDate.getMonth() + 1}月</span>`;
-
-        }
-
-        function nextmonth() {
-            currentDate.setMonth(currentDate.getMonth() + 1); // 翌月に移動
-            currentDate.setDate(1); // 1日に設定
-            fetchAvailability(currentDate);
-        }
-
-        function previousmonth() {
-            currentDate.setMonth(currentDate.getMonth() - 1); // 前月に移動
-            currentDate.setDate(1); // 1日に設定
-            fetchAvailability(currentDate);
-        }
-
-        function nextWeek() {
-            currentDate.setDate(currentDate.getDate() + 7);
-            fetchAvailability(currentDate);
-        }
-
-        function previousWeek() {
-            currentDate.setDate(currentDate.getDate() - 7);
-            fetchAvailability(currentDate);
-        }
-
-        function showLoadingSpinner() {
-            document.getElementById('loadingSpinner').style.display = 'block';
-        }
-
-        function hideLoadingSpinner() {
-            document.getElementById('loadingSpinner').style.display = 'none';
         }
     </script>
 </body>
 
 </html>
-
-
-
-
